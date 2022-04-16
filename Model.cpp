@@ -4,13 +4,13 @@
 Model::Model(std::ifstream file) {
     std::string content;
     file >> content;
-    if (content != "OFF") throw "This is not an OFF file.";
+    if (content != "OFF") throw std::runtime_error("This is not an OFF file.");
     file >> content;
     numberOfPoints = std::stoi(content);
     file >> content;
     numberOfLinks = std::stoi(content);
     file >> content;
-    if (content != "0") throw "Unsupported.";
+    if (content != "0") throw std::runtime_error("Unsupported.");
     for (int i = 0 ; i < numberOfPoints ; i++) {
         file >> content;
         float x = std::stof(content);
@@ -23,7 +23,7 @@ Model::Model(std::ifstream file) {
     }
     for (int i = 0 ; i < numberOfLinks ; i++) {
         file >> content;
-        if (content != "3") throw "Unsupported.";
+        if (content != "3") throw std::runtime_error("Unsupported.");
         file >> content;
         int point1 = std::stoi(content);
         file >> content;
