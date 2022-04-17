@@ -1,4 +1,6 @@
-#include "Point.h"
+#pragma once
+
+#include "Point.hpp"
 #include <memory>
 
 class MathVect {

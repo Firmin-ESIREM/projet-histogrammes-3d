@@ -1,5 +1,7 @@
+#pragma once
+
 #include <memory>
-#include "MathVect.h"
+#include "MathVect.hpp"
 
 class Plane {
 private:

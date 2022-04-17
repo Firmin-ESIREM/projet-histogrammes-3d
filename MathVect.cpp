@@ -1,4 +1,4 @@
-#include "MathVect.h"
+#include "MathVect.hpp"
 
 MathVect::MathVect(const std::shared_ptr<Point>& beginningPoint, const std::shared_ptr<Point>& endPoint) {
     x = endPoint->getX() - beginningPoint->getX();

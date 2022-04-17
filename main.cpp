@@ -1,6 +1,4 @@
-#include "Model.h"
-
-#include <iostream>
+#include "Model.hpp"
 
 int main(int argc, const char** argv) {
     if (argc != 2) {
@@ -11,5 +9,8 @@ int main(int argc, const char** argv) {
     Model model = Model(std::move(file));
 
 
+
     return 0;
 }
+
+

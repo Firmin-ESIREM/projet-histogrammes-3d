@@ -1,4 +1,4 @@
-#include "Model.h"
+#include "Model.hpp"
 #include <iostream>
 
 Model::Model(std::ifstream file) {
@@ -8,7 +8,7 @@ Model::Model(std::ifstream file) {
     file >> content;
     numberOfPoints = std::stoi(content);
     file >> content;
-    numberOfLinks = std::stoi(content);
+    numberOfPlanes = std::stoi(content);
     file >> content;
     if (content != "0") throw std::runtime_error("Unsupported.");
     for (int i = 0 ; i < numberOfPoints ; i++) {
@@ -21,7 +21,7 @@ Model::Model(std::ifstream file) {
         std::shared_ptr<Point> point = std::make_shared<Point>(x, y, z);
         points.push_back(point);
     }
-    for (int i = 0 ; i < numberOfLinks ; i++) {
+    for (int i = 0 ; i < numberOfPlanes ; i++) {
         file >> content;
         if (content != "3") throw std::runtime_error("Unsupported.");
         file >> content;

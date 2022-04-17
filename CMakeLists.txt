@@ -3,4 +3,4 @@ project(projet_histogrammes_3d)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(projet_histogrammes main.cpp Model.cpp Model.h Point.cpp Point.h Plane.cpp Plane.h MathVect.cpp MathVect.h)
+add_executable(projet_histogrammes main.cpp Model.cpp Model.hpp Point.cpp Point.hpp Plane.cpp Plane.hpp MathVect.cpp MathVect.hpp Shape3D.cpp Shape3D.hpp shapes.cpp shapes.hpp)
