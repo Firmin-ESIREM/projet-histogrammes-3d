@@ -1,4 +1,5 @@
 #include "Model.hpp"
+#include "shapes.hpp"
 
 int main(int argc, const char** argv) {
     if (argc != 2) {
@@ -7,7 +8,6 @@ int main(int argc, const char** argv) {
     std::ifstream file = std::ifstream(argv[1]);
     if (!file.is_open()) throw std::runtime_error("Error while reading the file.");
     Model model = Model(std::move(file));
-
 
 
     return 0;
