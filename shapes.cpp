@@ -3,6 +3,7 @@
 #include <memory>
 #include <cmath>
 
+
 Shape3D cube() {
     std::vector<std::shared_ptr<Point>> points;
     for (int i = 0 ; i < 2 ; i++) for (int k = 0 ; k < 2 ; k++) for (int m = 0 ; m < 2 ; m++)
@@ -20,8 +21,6 @@ Shape3D cube() {
     return shape;
 }
 
-
-#include <iostream>
 
 Shape3D tetrahedron() {
     std::vector<std::shared_ptr<Point>> points = {

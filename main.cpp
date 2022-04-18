@@ -2,6 +2,10 @@
 #include "shapes.hpp"
 
 int main(int argc, const char** argv) {
+    Shape3D shapeCube = cube();
+    Shape3D shapeTetrahedron = tetrahedron();
+
+
     if (argc != 2) {
         throw std::runtime_error("Please specify the right number of parameters.");
     }

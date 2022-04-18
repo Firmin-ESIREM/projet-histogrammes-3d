@@ -11,7 +11,7 @@ private:
     std::vector<std::shared_ptr<Point>> points;
     std::vector<std::shared_ptr<Plane>> planes;
 public:
-    Model(std::ifstream file);
+    explicit Model(std::ifstream file);
     [[nodiscard]] int getNumberOfPoints() const { return numberOfPoints; };
     [[nodiscard]] int getNumberOfPlanes() const { return numberOfPlanes; };
     [[nodiscard]] std::vector<std::shared_ptr<Point>> getPoints() const { return points; };
