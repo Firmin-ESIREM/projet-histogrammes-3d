@@ -1,5 +1,6 @@
 #include "Model.hpp"
 #include "shapes.hpp"
+#include <cstdio>
 
 int main(int argc, const char** argv) {
     Shape3D shapeCube = cube();
@@ -14,9 +15,10 @@ int main(int argc, const char** argv) {
 
     std::string bddName = argv[1];
     bddName = "output/" + bddName;
+    std::ofstream writeTo = std::ofstream(bddName + "_cube.csv");
+    writeTo << "face_no;scal_sum" << std::endl;
     int i = 0;
     for (auto & face : shapeCube.getFaces()) {
-        std::ofstream writeTo = std::ofstream(bddName + "_cube.csv", std::ios_base::app);
         i++;
         MathVect nFace = face->getNormalVect();
         float faceSum = 0;
@@ -25,13 +27,14 @@ int main(int argc, const char** argv) {
             float scal = nVect * nFace;
             faceSum += scal;
         }
-        writeTo << i << ";" << faceSum << "\n";
+        writeTo << "Face " << i << ";" << faceSum << std::endl;
     }
 
     i = 0;
 
+    writeTo = std::ofstream(bddName + "_tetrahedron.csv");
+    writeTo << "face_no;scal_sum" << std::endl;
     for (auto & face : shapeTetrahedron.getFaces()) {
-        std::ofstream writeTo = std::ofstream(bddName + "_tetrahedron.csv", std::ios_base::app);
         i++;
         MathVect nFace = face->getNormalVect();
         float faceSum = 0;
@@ -40,7 +43,7 @@ int main(int argc, const char** argv) {
             float scal = nVect * nFace;
             faceSum += scal;
         }
-        writeTo << i << ";" << faceSum << std::endl;
+        writeTo << "Face " << i << ";" << faceSum << std::endl;
     }
 
     return 0;
