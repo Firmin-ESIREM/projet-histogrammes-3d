@@ -1,7 +1,8 @@
 #include "Model.hpp"
 #include <iostream>
+#include <utility>
 
-Model::Model(std::ifstream file) {
+Model::Model(std::ifstream file, std::string _name) : name(std::move(_name)) {
     std::string content;
     file >> content;
     if (content != "OFF") throw std::runtime_error("This is not an OFF file.");
