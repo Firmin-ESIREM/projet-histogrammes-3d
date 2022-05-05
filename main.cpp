@@ -1,6 +1,5 @@
 #include "Model.hpp"
 #include "shapes.hpp"
-#include <cstdio>
 
 int main(int argc, const char** argv) {
     Shape3D shapeCube = cube();
