@@ -11,8 +11,10 @@ private:
     std::string name;
     std::vector<std::shared_ptr<Point>> points;
     std::vector<std::shared_ptr<Plane>> planes;
+    std::shared_ptr<Point> barycenter;
 public:
     explicit Model(std::ifstream file, std::string _name);
+    Model(std::vector<std::shared_ptr<Point>> _points, std::vector<std::shared_ptr<Plane>> _planes, std::string _name, std::shared_ptr<Point> _barycenter);
     [[nodiscard]] int getNumberOfPoints() const { return numberOfPoints; };
     [[nodiscard]] int getNumberOfPlanes() const { return numberOfPlanes; };
     [[nodiscard]] std::string getName() const { return name; };

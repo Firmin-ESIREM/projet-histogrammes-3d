@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Shape3D.hpp"
+#include "Model.hpp"
 
-Shape3D cube();
-Shape3D tetrahedron();
+Model cube();
+Model tetrahedron();

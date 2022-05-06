@@ -1,9 +1,10 @@
 #include "Model.hpp"
 #include "shapes.hpp"
+#include "compare.hpp"
 
 int main(int argc, const char** argv) {
-    Shape3D shapeCube = cube();
-    Shape3D shapeTetrahedron = tetrahedron();
+    Model shapeCube = cube();
+    Model shapeTetrahedron = tetrahedron();
 
     if (argc != 2)
         throw std::runtime_error("Please specify the right number of parameters.");
@@ -12,8 +13,10 @@ int main(int argc, const char** argv) {
     if (!file.is_open()) throw std::runtime_error("Error while reading the file.");
     Model model = Model(std::move(file), argv[1]);
 
-    std::string bddName = argv[1];
-    bddName = "output/" + bddName;
+    compareResToCsv(compare(model, shapeCube), model.getName(), shapeCube.getName());
+    compareResToCsv(compare(model, shapeTetrahedron), model.getName(), shapeTetrahedron.getName());
+
+    /*std::string bddName = "output/" + model.getName();
     std::ofstream writeTo = std::ofstream(bddName + "_cube.csv");
     writeTo << "face_no;scal_sum" << std::endl;
     int i = 0;
@@ -24,7 +27,7 @@ int main(int argc, const char** argv) {
         for (auto & plane : model.getPlanes()) {
             MathVect nVect = plane->getNormalVect();
             float scal = nVect * nFace;
-            faceSum += scal;
+            if (scal > 0) faceSum += scal;
         }
         writeTo << "Face " << i << ";" << faceSum << std::endl;
     }
@@ -40,10 +43,13 @@ int main(int argc, const char** argv) {
         for (auto & plane : model.getPlanes()) {
             MathVect nVect = plane->getNormalVect();
             float scal = nVect * nFace;
-            faceSum += scal;
+            if (scal > 0) faceSum += scal;
         }
         writeTo << "Face " << i << ";" << faceSum << std::endl;
-    }
+    }*/
+
+
+
 
     return 0;
 }

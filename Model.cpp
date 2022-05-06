@@ -1,4 +1,5 @@
 #include "Model.hpp"
+#include "utility_funcs.hpp"
 #include <iostream>
 #include <utility>
 
@@ -22,6 +23,7 @@ Model::Model(std::ifstream file, std::string _name) : name(std::move(_name)) {
         std::shared_ptr<Point> point = std::make_shared<Point>(x, y, z);
         points.push_back(point);
     }
+    barycenter = calculateBarycenter(points);
     for (int i = 0 ; i < numberOfPlanes ; i++) {
         file >> content;
         if (content != "3") throw std::runtime_error("Unsupported.");
@@ -32,7 +34,13 @@ Model::Model(std::ifstream file, std::string _name) : name(std::move(_name)) {
         file >> content;
         int point3 = std::stoi(content);
         std::shared_ptr<Plane> plane = std::make_shared<Plane>(
-                getPointByIndex(point1), getPointByIndex(point2), getPointByIndex(point3));
+                getPointByIndex(point1), getPointByIndex(point2), getPointByIndex(point3), barycenter);
         planes.push_back(plane);
     }
+}
+
+Model::Model(std::vector<std::shared_ptr<Point>> _points, std::vector<std::shared_ptr<Plane>> _planes, std::string _name, std::shared_ptr<Point> _barycenter)
+    : points(std::move(_points)), planes(std::move(_planes)), name(std::move(_name)), barycenter(std::move(_barycenter)) {
+    numberOfPoints = (int) points.size();
+    numberOfPlanes = (int) planes.size();
 }

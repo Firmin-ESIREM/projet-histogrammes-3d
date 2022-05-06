@@ -79,6 +79,7 @@ fabric.properties
 
 # Files used for this project
 *.off
+*.csv
 build/
 projet_histogrammes_3d
 projet_histogrammes_3d.exe
