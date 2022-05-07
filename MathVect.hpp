@@ -15,6 +15,11 @@ public:
     [[nodiscard]] float getX() const { return x; };
     [[nodiscard]] float getY() const { return y; };
     [[nodiscard]] float getZ() const { return z; };
+    [[nodiscard]] Point translate(std::shared_ptr<Point> point) const;
     MathVect operator^(MathVect other) const;  // Cross (= vector) product
     float operator*(MathVect other) const;  // Dot (= scalar) product
+    MathVect operator+() const;
+    MathVect operator-() const;
+    MathVect operator+(MathVect other) const;
+    MathVect operator-(MathVect other) const;
 };

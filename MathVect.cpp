@@ -20,3 +20,23 @@ MathVect MathVect::operator^(MathVect other) const {  // Cross (= vector) produc
 float MathVect::operator*(MathVect other) const {  // Dot (= scalar) product
     return x * other.getX() + y * other.getY() + z * other.getZ();
 }
+
+MathVect MathVect::operator+() const {
+    return {x, y, z};
+}
+
+MathVect MathVect::operator-() const {
+    return {-x, -y, -z};
+}
+
+MathVect MathVect::operator+(MathVect other) const {
+    return {x + other.getX(), y + other.getY(), z + other.getZ()};
+}
+
+MathVect MathVect::operator-(MathVect other) const {
+    return {x - other.getX(), y - other.getY(), z - other.getZ()};
+}
+
+Point MathVect::translate(std::shared_ptr<Point> point) const {
+    return {x + point->getX(), y + point->getY(), z + point->getZ()};
+}
