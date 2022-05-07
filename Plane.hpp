@@ -12,6 +12,6 @@ private:
     MathVect vect2;
     MathVect normalVect;
 public:
-    Plane(std::shared_ptr<Point> _point1, std::shared_ptr<Point> _point2, std::shared_ptr<Point> _point3, std::shared_ptr<Point> barycenter);
+    Plane(std::shared_ptr<Point> _point1, std::shared_ptr<Point> _point2, std::shared_ptr<Point> _point3, const std::shared_ptr<Point>& barycenter);
     [[nodiscard]] MathVect getNormalVect() const { return normalVect; };
 };

@@ -37,6 +37,6 @@ MathVect MathVect::operator-(MathVect other) const {
     return {x - other.getX(), y - other.getY(), z - other.getZ()};
 }
 
-Point MathVect::translate(std::shared_ptr<Point> point) const {
+Point MathVect::translate(const std::shared_ptr<Point>& point) const {
     return {x + point->getX(), y + point->getY(), z + point->getZ()};
 }

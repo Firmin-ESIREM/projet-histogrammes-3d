@@ -8,10 +8,12 @@ int main(int argc, const char** argv) {
 
     if (argc != 2)
         throw std::runtime_error("Please specify the right number of parameters.");
+    std::string path = argv[1];
 
-    std::ifstream file = std::ifstream(argv[1]);
+    std::ifstream file = std::ifstream(path);
     if (!file.is_open()) throw std::runtime_error("Error while reading the file.");
-    Model model = Model(std::move(file), argv[1]);
+    std::string modelName = path.substr(path.find_last_of("/\\") + 1);
+    Model model = Model(std::move(file), modelName);
 
     compareResToCsv(compare(model, shapeCube), model.getName(), shapeCube.getName());
     compareResToCsv(compare(model, shapeTetrahedron), model.getName(), shapeTetrahedron.getName());

@@ -5,4 +5,4 @@
 #include <vector>
 
 
-std::shared_ptr<Point> calculateBarycenter(std::vector<std::shared_ptr<Point>> points);
+std::shared_ptr<Point> calculateBarycenter(const std::vector<std::shared_ptr<Point>>& points);

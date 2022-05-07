@@ -2,6 +2,7 @@
 
 std::vector<std::map<std::string, float>> compare(const Model& model, const Model& shape) {
     int i = 0;
+    float totalSum = 0;
     std::vector<std::map<std::string, float>> result;
     for (auto & face : shape.getPlanes()) {
         i++;
@@ -14,17 +15,21 @@ std::vector<std::map<std::string, float>> compare(const Model& model, const Mode
         }
         result.push_back(std::map<std::string, float> {
             {"face_no", (float) i},
-            {"scal_sum", faceSum}
+            {"scal_sum", faceSum},
         });
+        totalSum += faceSum;
+    }
+    for (auto & face : result) {
+        face["normalized_sum"] = face["scal_sum"] / totalSum;
     }
     return result;
 }
 
-void compareResToCsv(std::vector<std::map<std::string, float>> res, std::string modelName, std::string shapeName) {
+void compareResToCsv(std::vector<std::map<std::string, float>> res, const std::string& modelName, const std::string& shapeName) {
     std::string bddName = "output/" + modelName;
     std::ofstream writeTo = std::ofstream(bddName + "_" + shapeName + ".csv");
-    writeTo << "face_no;scal_sum" << std::endl;
+    writeTo << "face_no;scal_sum;normalized_sum" << std::endl;
     for (auto & face : res) {
-        writeTo << "Face " << face["face_no"] << ";" << face["scal_sum"] << std::endl;
+        writeTo << "Face " << face["face_no"] << ";" << face["scal_sum"] << ";" << face["normalized_sum"] << std::endl;
     }
 }
