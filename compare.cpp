@@ -25,8 +25,8 @@ std::vector<std::map<std::string, float>> compare(const Model& model, const Mode
     return result;
 }
 
-void compareResToCsv(std::vector<std::map<std::string, float>> res, const std::string& modelName, const std::string& shapeName) {
-    std::string bddName = "output/" + modelName;
+void compareResToCsv(std::vector<std::map<std::string, float>> res, const std::string& modelName, const std::string& shapeName, const std::string& outputDir) {
+    std::string bddName = outputDir + "/" + modelName;
     std::ofstream writeTo = std::ofstream(bddName + "_" + shapeName + ".csv");
     writeTo << "face_no;scal_sum;normalized_sum" << std::endl;
     for (auto & face : res) {

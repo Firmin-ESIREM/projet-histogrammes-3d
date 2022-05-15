@@ -10,4 +10,3 @@ Plane::Plane(std::shared_ptr<Point> _point1, std::shared_ptr<Point> _point2, std
     Point invertPoint = invertNormal.translate(point1);
     if (point.distanceWith(*barycenter) < invertPoint.distanceWith(*barycenter)) normalVect = invertNormal;
 }
-

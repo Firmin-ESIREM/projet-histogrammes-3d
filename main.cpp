@@ -1,59 +1,33 @@
 #include "Model.hpp"
 #include "shapes.hpp"
 #include "compare.hpp"
+#include <filesystem>
+
 
 int main(int argc, const char** argv) {
+
     Model shapeCube = cube();
     Model shapeTetrahedron = tetrahedron();
 
-    if (argc != 2)
+    if (argc < 2)
         throw std::runtime_error("Please specify the right number of parameters.");
-    std::string path = argv[1];
+    for (int i = 1 ; i < argc ; i++) {
+        std::string path = argv[i];
 
-    std::ifstream file = std::ifstream(path);
-    if (!file.is_open()) throw std::runtime_error("Error while reading the file.");
-    std::string modelName = path.substr(path.find_last_of("/\\") + 1);
-    Model model = Model(std::move(file), modelName);
+        std::ifstream file = std::ifstream(path);
+        if (!file.is_open()) throw std::runtime_error("Error while reading the file.");
+        std::string modelName = path.substr(path.find_last_of("/\\") + 1);
+        Model model = Model(std::move(file), modelName);
 
-    compareResToCsv(compare(model, shapeCube), model.getName(), shapeCube.getName());
-    compareResToCsv(compare(model, shapeTetrahedron), model.getName(), shapeTetrahedron.getName());
+        std::string outputDir = "output";
+        if (!std::filesystem::is_directory(outputDir) || !std::filesystem::exists(outputDir))
+            std::filesystem::create_directory(outputDir);
 
-    /*std::string bddName = "output/" + model.getName();
-    std::ofstream writeTo = std::ofstream(bddName + "_cube.csv");
-    writeTo << "face_no;scal_sum" << std::endl;
-    int i = 0;
-    for (auto & face : shapeCube.getFaces()) {
-        i++;
-        MathVect nFace = face->getNormalVect();
-        float faceSum = 0;
-        for (auto & plane : model.getPlanes()) {
-            MathVect nVect = plane->getNormalVect();
-            float scal = nVect * nFace;
-            if (scal > 0) faceSum += scal;
-        }
-        writeTo << "Face " << i << ";" << faceSum << std::endl;
+        std::vector<std::map<std::string, float>> compareToCube = compare(model, shapeCube);
+        std::vector<std::map<std::string, float>> compareToTetrahedron = compare(model, shapeTetrahedron);
+        compareResToCsv(compareToCube, model.getName(), shapeCube.getName(), outputDir);
+        compareResToCsv(compareToTetrahedron, model.getName(), shapeTetrahedron.getName(), outputDir);
     }
-
-    i = 0;
-
-    writeTo = std::ofstream(bddName + "_tetrahedron.csv");
-    writeTo << "face_no;scal_sum" << std::endl;
-    for (auto & face : shapeTetrahedron.getFaces()) {
-        i++;
-        MathVect nFace = face->getNormalVect();
-        float faceSum = 0;
-        for (auto & plane : model.getPlanes()) {
-            MathVect nVect = plane->getNormalVect();
-            float scal = nVect * nFace;
-            if (scal > 0) faceSum += scal;
-        }
-        writeTo << "Face " << i << ";" << faceSum << std::endl;
-    }*/
-
-
-
 
     return 0;
 }
-
-
