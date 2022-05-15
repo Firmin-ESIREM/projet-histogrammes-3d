@@ -6,8 +6,11 @@
 Model::Model(std::ifstream file, std::string _name) : name(std::move(_name)) {
     std::string content;
     file >> content;
-    if (content != "OFF") throw std::runtime_error("This is not an OFF file.");
-    file >> content;
+    if (content == "OFF") file >> content;
+    else {
+        if (content.rfind("OFF", 0) == 0) content.erase(0, 3);
+        else throw std::runtime_error("This is not an OFF file.");
+    }
     numberOfPoints = std::stoi(content);
     file >> content;
     numberOfPlanes = std::stoi(content);
