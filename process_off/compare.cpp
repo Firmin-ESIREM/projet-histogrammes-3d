@@ -33,3 +33,7 @@ void compareResToCsv(std::vector<std::map<std::string, float>> res, const std::s
         writeTo << "Face " << face["face_no"] << ";" << face["scal_sum"] << ";" << face["normalized_sum"] << std::endl;
     }
 }
+
+void appendResToJson(std::vector<std::map<std::string, float>> res, const std::string& modelName, const std::string& shapeName) {
+
+}

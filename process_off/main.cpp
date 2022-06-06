@@ -6,8 +6,7 @@
 
 int main(int argc, const char** argv) {
 
-    Model shapeCube = cube();
-    Model shapeTetrahedron = tetrahedron();
+    std::vector<Model> shapes = { cube(), tetrahedron(), octahedron(), dodecahedron() };
 
     if (argc < 2)
         throw std::runtime_error("Please specify the right number of parameters.");
@@ -23,10 +22,10 @@ int main(int argc, const char** argv) {
         if (!std::filesystem::is_directory(outputDir) || !std::filesystem::exists(outputDir))
             std::filesystem::create_directory(outputDir);
 
-        std::vector<std::map<std::string, float>> compareToCube = compare(model, shapeCube);
-        std::vector<std::map<std::string, float>> compareToTetrahedron = compare(model, shapeTetrahedron);
-        compareResToCsv(compareToCube, model.getName(), shapeCube.getName(), outputDir);
-        compareResToCsv(compareToTetrahedron, model.getName(), shapeTetrahedron.getName(), outputDir);
+        for (auto & shape : shapes) {
+            std::vector<std::map<std::string, float>> compareTo = compare(model, shape);
+            compareResToCsv(compareTo, model.getName(), shape.getName(), outputDir);
+        }
     }
 
     return 0;

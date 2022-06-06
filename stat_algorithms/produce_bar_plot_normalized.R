@@ -9,7 +9,8 @@ if (length(args) == 0 || length(args) == 1) {
 }
 
 pdf(args[3])
-csv_df<-read.csv(args[2], header=TRUE, sep=";")
+csv_df<-read.csv(args[2], header=TRUE, sep=";", stringsAsFactors=FALSE)
+csv_df$face_no <- factor(csv_df$face_no, levels=csv_df$face_no)
 ggplot(data=csv_df, aes(x=face_no, y=normalized_sum)) +
   ylim(0, 1) +
   ggtitle(args[1]) +
