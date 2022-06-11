@@ -29,7 +29,10 @@ Model::Model(std::ifstream file, std::string _name) : name(std::move(_name)) {
     barycenter = calculateBarycenter(points);
     for (int i = 0 ; i < numberOfPlanes ; i++) {
         file >> content;
-        if (content != "3") throw std::runtime_error("Unsupported.");
+        if (content != "3") {
+            if (i == 0) throw std::runtime_error("Unsupported.");
+            else throw std::runtime_error("Unsupported. Please check that you provided a monochromatic OFF file.");
+        }
         file >> content;
         int point1 = std::stoi(content);
         file >> content;

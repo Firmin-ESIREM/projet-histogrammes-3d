@@ -6,3 +6,4 @@ Model cube();
 Model tetrahedron();
 Model octahedron();
 Model dodecahedron();
+Model isocahedron();

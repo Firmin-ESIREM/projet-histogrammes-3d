@@ -123,3 +123,54 @@ Model dodecahedron() {
     Model shape = {points, faces, "dodecahedron", barycenter};
     return shape;
 }
+
+Model isocahedron() {
+    float goldenRatio = (float) (1 + std::sqrt(5))/2;
+    std::vector<std::shared_ptr<Point>> points;
+    for (int i = 0 ; i < 2 ; i++)
+        for (int k = 0 ; k < 2 ; k++) {
+            float cfI = i == 1 ? -1 : 1;
+            float cfK = k == 1 ? -1 : 1;
+            points.push_back(std::make_shared<Point>(cfI * goldenRatio, cfK, 0));
+        }
+    for (int i = 0 ; i < 2 ; i++)
+        for (int k = 0 ; k < 2 ; k++) {
+            float cfI = i == 1 ? -1 : 1;
+            float cfK = k == 1 ? -1 : 1;
+            points.push_back(std::make_shared<Point>(cfI, 0, cfK * goldenRatio));
+        }
+    for (int i = 0 ; i < 2 ; i++)
+        for (int k = 0 ; k < 2 ; k++) {
+            float cfI = i == 1 ? -1 : 1;
+            float cfK = k == 1 ? -1 : 1;
+            points.push_back(std::make_shared<Point>(0, cfI * goldenRatio, cfK));
+        }
+
+    std::shared_ptr<Point> barycenter = calculateBarycenter(points);
+
+    std::vector<std::shared_ptr<Plane>> faces = {
+            std::make_shared<Plane>(points[4], points[6], points[8], barycenter),
+            std::make_shared<Plane>(points[6], points[10], points[4], barycenter),
+            std::make_shared<Plane>(points[4], points[1], points[0], barycenter),
+            std::make_shared<Plane>(points[1], points[10], points[4], barycenter),
+            std::make_shared<Plane>(points[0], points[4], points[8], barycenter),
+            std::make_shared<Plane>(points[2], points[6], points[8], barycenter),
+            std::make_shared<Plane>(points[2], points[3], points[6], barycenter),
+            std::make_shared<Plane>(points[3], points[6], points[10], barycenter),
+            std::make_shared<Plane>(points[3], points[10], points[11], barycenter),
+            std::make_shared<Plane>(points[11], points[1], points[10], barycenter),
+            std::make_shared<Plane>(points[1], points[5], points[0], barycenter),
+            std::make_shared<Plane>(points[11], points[1], points[5], barycenter),
+            std::make_shared<Plane>(points[0], points[9], points[5], barycenter),
+            std::make_shared<Plane>(points[9], points[8], points[0], barycenter),
+            std::make_shared<Plane>(points[9], points[8], points[2], barycenter),
+            std::make_shared<Plane>(points[9], points[7], points[2], barycenter),
+            std::make_shared<Plane>(points[7], points[2], points[3], barycenter),
+            std::make_shared<Plane>(points[7], points[11], points[3], barycenter),
+            std::make_shared<Plane>(points[7], points[5], points[11], barycenter),
+            std::make_shared<Plane>(points[9], points[7], points[5], barycenter)
+    };
+
+    Model shape = {points, faces, "isocahedron", barycenter};
+    return shape;
+}
