@@ -111,4 +111,9 @@ build/
 projet_histogrammes_3d
 projet_histogrammes_3d.exe
 result.txt
+best.txt
+training_models.txt
+test_models.txt
 output/
+output_training/
+output_test/
