@@ -29,7 +29,7 @@ do
   for shape in $shapes
   do
     total_occurences="$(grep -E "$category.*_$shape.csv ->" "$2" | wc -l | xargs)"
-    right_guesses="$(grep -E "$category.*_$shape.csv -> $category.*_$shape.csv" "$2" | wc -l | xargs)"
+    right_guesses="$(grep -E "$category.*_$shape.csv -> $category" "$2" | wc -l | xargs)"
     res="$(echo "($right_guesses/$total_occurences)*100" | bc -l)"
     if (( $(echo "$res > $better" | bc -l) ))
     then

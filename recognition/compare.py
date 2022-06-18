@@ -1,4 +1,5 @@
 from sys import argv, exit
+from collections import Counter
 
 if len(argv) < 2:
     exit(1)
@@ -36,6 +37,7 @@ for mod in ref_models_files:
 for h, model_to_compare in enumerate(models_to_compare):
     matching = 0
     matching_sim_index = 0
+    similarities = []
 
     for i, model in enumerate(ref_models):
         try:
@@ -44,15 +46,36 @@ for h, model_to_compare in enumerate(models_to_compare):
                 for k, face in enumerate(model_to_compare):
                     difference_index += abs(model[k] - face)
                 similarity_index = 1 - difference_index
-                if matching_sim_index < similarity_index:
-                    matching_sim_index = similarity_index
-                    matching = i
+                similarities.append({"model": ref_models_files[i], "similarity": similarity_index})
         except Exception as e:
             with open("exception.txt", 'a') as f:
                 print(f"Exception {str(e)} when comparing {models_to_compare_files[h]} to {ref_models_files[i]}.")
                 f.write(f"Exception {str(e)} when comparing {models_to_compare_files[h]} to {ref_models_files[i]}.")
+    
+    similarities.sort(key=lambda x: x["similarity"], reverse=True)
+
+
+    matching_classes = []
+
+    for i in range(0, 5):
+        file_name = similarities[i]["model"].split('_')
+        del file_name[-2:]
+        matching_classes.append('_'.join(file_name))
+
+    counted_classes = dict(Counter(matching_classes))
+    could_be = []
+    could_be_nb = 0
+
+    for key, value in counted_classes.items():
+        if value > could_be_nb:
+            could_be = [key]
+            could_be_nb = value
+        elif value == could_be_nb:
+            could_be.append(key)
+    
+    could_be_str = ','.join(could_be)
 
     with open("result.txt", 'a') as f:
-        f.write(f"{models_to_compare_files[h]} -> {ref_models_files[matching]} ({str(matching_sim_index)})\n")
+        f.write(f"{models_to_compare_files[h]} -> {could_be_str}\n")
 
     print(f"[v] Compared {models_to_compare_files[h]}.")
