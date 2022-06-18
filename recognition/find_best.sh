@@ -8,7 +8,7 @@ fi
 
 original_path="$PWD"
 
-shapes="tetrahedron cube octahedron dodecahedron isocahedron"
+shapes="tetrahedron cube octahedron dodecahedron icosahedron"
 categories=""
 
 cd "$1"
