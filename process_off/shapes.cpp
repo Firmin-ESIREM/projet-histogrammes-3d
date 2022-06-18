@@ -124,7 +124,7 @@ Model dodecahedron() {
     return shape;
 }
 
-Model isocahedron() {
+Model icosahedron() {
     float goldenRatio = (float) (1 + std::sqrt(5))/2;
     std::vector<std::shared_ptr<Point>> points;
     for (int i = 0 ; i < 2 ; i++)
@@ -171,6 +171,6 @@ Model isocahedron() {
             std::make_shared<Plane>(points[9], points[7], points[5], barycenter)
     };
 
-    Model shape = {points, faces, "isocahedron", barycenter};
+    Model shape = {points, faces, "icosahedron", barycenter};
     return shape;
 }

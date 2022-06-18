@@ -6,7 +6,7 @@
 
 int main(int argc, const char** argv) {
 
-    std::vector<Model> shapes = { cube(), tetrahedron(), octahedron(), dodecahedron(), isocahedron() };
+    std::vector<Model> shapes = { cube(), tetrahedron(), octahedron(), dodecahedron(), icosahedron() };
 
     if (argc < 2)
         throw std::runtime_error("Please specify the right number of parameters.");
