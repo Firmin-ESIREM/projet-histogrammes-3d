@@ -1,6 +1,9 @@
 # Histogrammes d’orientation 3D
 Projet de fin de 1ère année de cycle préparatoire à l’ESIREM réalisé par Enzo Boissenin, Thomas Giroud et Firmin Launay.
 
+## Compte-rendu
+Le compte-rendu du projet est disponible en suivant [ce lien](https://raw.githubusercontent.com/Firmin-ESIREM/projet-histogrammes-3d/main/report.pdf).
+
 ## Code
 
 ### Dossier `process_off`
